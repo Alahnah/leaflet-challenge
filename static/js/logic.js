@@ -15,11 +15,11 @@ function markerSize(magnitude) {
 
 //color depth
 function markerColor(depth) {
-  if (depth < 10) return "#00ffff";
-  else if (depth < 30) return "#00ffff";
-  else if (depth < 50) return "#00ffff";
-  else if (depth < 70) return "#00ffff";
-  else if (depth < 90) return "#00ffff";
+  if (depth < 1) return "#00ffff";
+  else if (depth < 3) return "#00ffff";
+  else if (depth < 5) return "#00ffff";
+  else if (depth < 7) return "#00ffff";
+  else if (depth < 9) return "#00ffff";
   else return "#00ffff";
 
 }
@@ -61,15 +61,14 @@ function createMap(earthquakes) {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   })
 
-  let sat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
-    maxZoom: 20,
-    subdomains:['mt0','mt1','mt2','mt3']
-});
+  let topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+  });
 
   // Create a baseMaps object.
   let baseMaps = {
     "Street Map": street,
-    "Satellite Map": sat
+    "Topographic Map": topo
   };
 
   // Create an overlay object to hold our overlay.
@@ -93,7 +92,6 @@ function createMap(earthquakes) {
     collapsed: false
   }).addTo(myMap);
 
-
 //Creating a legend
 let legend = L.control({position: 'bottomright'});
 
@@ -112,5 +110,7 @@ legend.onAdd = function () {
           legend.addTo(myMap);
 
 }
+  
+ 
   
  
